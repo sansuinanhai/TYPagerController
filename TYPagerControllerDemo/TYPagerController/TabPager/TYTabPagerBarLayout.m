@@ -200,15 +200,17 @@
     if (_pagerTabBar.countOfItems == 0) {
         return;
     }
+    
+    __weak typeof(self) weakSelf = self;
     void (^animateBlock)() = ^{
         if (fromCell) {
-            fromCell.titleLabel.font = _normalTextFont;
-            fromCell.titleLabel.textColor = _normalTextColor;
-            fromCell.transform = CGAffineTransformMakeScale(_selectFontScale, _selectFontScale);
+            fromCell.titleLabel.font = weakSelf.normalTextFont;
+            fromCell.titleLabel.textColor = weakSelf.normalTextColor;
+            fromCell.transform = CGAffineTransformMakeScale(weakSelf.selectFontScale, weakSelf.selectFontScale);
         }
         if (toCell) {
-            toCell.titleLabel.font = _normalTextFont;
-            toCell.titleLabel.textColor = _selectedTextColor ? _selectedTextColor : _normalTextColor;
+            toCell.titleLabel.font = weakSelf.selectedTextFont;
+            toCell.titleLabel.textColor = weakSelf.selectedTextColor ? weakSelf.selectedTextColor : weakSelf.normalTextColor;
             toCell.transform = CGAffineTransformIdentity;
         }
     };
